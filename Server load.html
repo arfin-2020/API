@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call the API</title>
+</head>
+
+<body>
+    <h1>JSON</h1>
+    <h2>JavaScript Object Notation</h2>
+    <ul id="user-container">
+
+    </ul>
+    <script>
+        const user = {
+            id: 234,
+            name: "Arfin Chowdhury Arif",
+            Address: "cox's Bazar",
+            lover: {
+                name: "Arfin Chowdhury Arif",
+                age: 34,
+                Address: "Dhaka"
+            },
+        };
+
+        //{"id":234,"name":"Arfin Chowdhury Arif","Address":"cox's Bazar"}
+        const userJSON = JSON.stringify(user);
+        console.log(userJSON);
+        const userFromJSON = JSON.parse(userJSON);
+        console.log(userFromJSON);
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => displayusers(json))
+
+        function displayusers(users) {
+            const name = users.map(x => x.username);
+            const ul = document.getElementById("user-container");
+            for (let i = 0; i < name.length; i++) {
+                const users = name[i];
+                const li = document.createElement("li");
+                li.innerText = users;
+                ul.appendChild(li);
+            }
+            // console.log("users", users);
+            // const name = users.map(x => x.username);
+            // const Bigger = users.filter(x => x.id > 5);
+            // const biggerId = Bigger.map(x => x.id);
+            // console.log("biggerid", biggerId);
+            // console.log("id", Bigger);
+            // console.log("Name:", name);
+        }
+    </script>
+</body>
+
+</html>
